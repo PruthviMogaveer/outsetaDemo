@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 declare global {
   interface Window {
@@ -31,34 +31,30 @@ function AppRoot({ children }) {
       //   setSearchParams({});
     }
     if (window.Outseta) {
-        window.Outseta.getUser()
-          .then((profile) => {
-            console.log("User Profile:", profile);
-            callXanoApi(searchParams.get("access_token"));
-            sendDataToXano(profile, searchParams.get("access_token"));
-            
-          })
-          .catch((error) => {
-            console.error("Error fetching user data:", error);
-          });
-      }
+      window.Outseta.getUser()
+        .then(async (profile) => {
+          console.log("User Profile:", profile);
+          const tocken = await callXanoApi(searchParams.get("access_token"));
+          sendDataToXano(profile, tocken);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
   }, [searchParams, setSearchParams]);
 
-  
-  
-    const callXanoApi = async (token) => {
-      const url = "https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/outseta/auth"; // Xano URL
-  
-      try {
-        const res = await axios.post(url, { token }); // Send token as input
-        setResponse(res.data); // Store response data
-        console.log("Response:", res.data);
-      } catch (err) {
-        setError(err.message);
-      }
+  const callXanoApi = async (token) => {
+    const url = "https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/outseta/auth"; // Xano URL
+
+    try {
+      const res = await axios.post(url, { token }); // Send token as input
+      setResponse(res.data); // Store response data
+      console.log("Response:", res);
+      return res.data;
+    } catch (err) {
+      setError(err.message);
     }
-
-
+  };
 
   const sendDataToXano = async (profile, accessToken) => {
     const url = "https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/user";
@@ -99,8 +95,8 @@ function AppRoot({ children }) {
     } catch (err) {
       setErro(err.message);
     }
-}
-    
+  };
+
   return children;
 }
 
