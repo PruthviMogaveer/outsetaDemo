@@ -106,50 +106,54 @@ function App() {
               </AppRoot>
             }
           >
-            <Route
-              path="/dashboard"
-              element={
-                isOnboarding ? (
-                  <OnboardingLayout progress={progress}>
-                    {progress.currentStep === "subscription" && (
-                      <SubscriptionStep
-                        onComplete={() => handleStepComplete("subscription")}
-                        onPlanSelect={setSelectedPlan}
-                      />
-                    )}
-                    {progress.currentStep === "survey" && (
-                      <SurveyStep
-                        onComplete={() => handleStepComplete("survey")}
-                      />
-                    )}
-                    {progress.currentStep === "searchIntro" && (
-                      <SearchIntroStep
-                        onComplete={() => handleStepComplete("searchIntro")}
-                        selectedPlan={selectedPlan}
-                      />
-                    )}
-                    {progress.currentStep === "searchCriteria" && (
-                      <SearchCriteriaStep
-                        onComplete={() => handleStepComplete("searchCriteria")}
-                        selectedPlan={selectedPlan}
-                      />
-                    )}
-                    {progress.currentStep === "buyerProfile" && (
-                      <BuyerProfileStep
-                        onComplete={() => handleStepComplete("buyerProfile")}
-                        onSkip={handleSkipBuyerProfile}
-                      />
-                    )}
-                  </OnboardingLayout>
-                ) : (
-                  <BusinessAcquisitionPlatform showTour={showDashboardTour} />
-                )
-              }
-            />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/all-leads" element={<AllLeads />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route>
+              <Route
+                path="/dashboard"
+                element={
+                  isOnboarding ? (
+                    <OnboardingLayout progress={progress}>
+                      {progress.currentStep === "subscription" && (
+                        <SubscriptionStep
+                          onComplete={() => handleStepComplete("subscription")}
+                          onPlanSelect={setSelectedPlan}
+                        />
+                      )}
+                      {progress.currentStep === "survey" && (
+                        <SurveyStep
+                          onComplete={() => handleStepComplete("survey")}
+                        />
+                      )}
+                      {progress.currentStep === "searchIntro" && (
+                        <SearchIntroStep
+                          onComplete={() => handleStepComplete("searchIntro")}
+                          selectedPlan={selectedPlan}
+                        />
+                      )}
+                      {progress.currentStep === "searchCriteria" && (
+                        <SearchCriteriaStep
+                          onComplete={() =>
+                            handleStepComplete("searchCriteria")
+                          }
+                          selectedPlan={selectedPlan}
+                        />
+                      )}
+                      {progress.currentStep === "buyerProfile" && (
+                        <BuyerProfileStep
+                          onComplete={() => handleStepComplete("buyerProfile")}
+                          onSkip={handleSkipBuyerProfile}
+                        />
+                      )}
+                    </OnboardingLayout>
+                  ) : (
+                    <BusinessAcquisitionPlatform showTour={showDashboardTour} />
+                  )
+                }
+              />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/all-leads" element={<AllLeads />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
