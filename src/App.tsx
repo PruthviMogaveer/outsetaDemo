@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import BusinessAcquisitionPlatform from "@/components/BusinessAcquisitionPlatform";
 import { AuthScreen } from "@/components/auth/AuthScreen";
 import { ProfilePage } from "@/components/profile/ProfilePage";
@@ -74,8 +80,12 @@ function App() {
     <TooltipProvider>
       <div className="bg-color/10 min-h-screen min-w-full fixed -z-10"></div>
       <>
-                <a href="https://search-assistant.outseta.com/auth?widgetMode=login#o-anonymous">login</a>
-                <a href="https://search-assistant.outseta.com/auth?widgetMode=register#o-anonymous">signup</a>
+        <a href="https://search-assistant.outseta.com/auth?widgetMode=login#o-anonymous">
+          login
+        </a>
+        <a href="https://search-assistant.outseta.com/auth?widgetMode=register#o-anonymous">
+          signup
+        </a>
       </>
       <BrowserRouter>
         <Routes>
@@ -88,8 +98,8 @@ function App() {
               //   onSuccess={handleAuthSuccess}
               // />
               <AppRoot>
-              <Outlet />
-            </AppRoot>
+                <Outlet />
+              </AppRoot>
             }
           />
           <Route
@@ -135,7 +145,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/all-leads" element={<AllLeads />} />
           <Route path="/support" element={<Support />} />
-          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
