@@ -1,0 +1,1 @@
+export type AppScreen = 'leads' | 'dashboard' | 'settings' | 'profile'; // adjust these values based on your actual app screens 
