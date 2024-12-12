@@ -76,10 +76,12 @@ function App() {
     }
   };
 
+  
+
   return (
     <TooltipProvider>
       <div className="bg-color/10 min-h-screen min-w-full fixed -z-10"></div>
-      <div className="mx-4 flex space-x-5">
+      {location.pathname === '/' && <div className="mx-4 flex space-x-5">
         <a href="https://search-assistant.outseta.com/auth?widgetMode=login#o-anonymous">
           login
         </a>
@@ -90,7 +92,7 @@ function App() {
         <a href="https://search-assistant.outseta.com/profile#o-authenticated">
           profile
         </a>
-      </div>
+      </div>}
       <BrowserRouter>
         <Routes>
           <Route
