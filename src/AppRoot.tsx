@@ -16,7 +16,7 @@ function AppRoot({ children }) {
     // Removing the access_token from the url is considered best practice
     // so that its not accidentally copied when sharing content.
     if (searchParams.get("access_token")) {
-      // setSearchParams({});
+      setSearchParams({});
     }
   }, [searchParams, setSearchParams]);
 
