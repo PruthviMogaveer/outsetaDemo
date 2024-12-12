@@ -86,6 +86,10 @@ function App() {
         <a href="https://search-assistant.outseta.com/auth?widgetMode=register#o-anonymous">
           signup
         </a>
+        <a href="/#o-logout-link">logot</a>
+        <a href="https://search-assistant.outseta.com/profile#o-authenticated">
+          profile
+        </a>
       </>
       <BrowserRouter>
         <Routes>
