@@ -1,4 +1,10 @@
 import { useEffect } from "react";
+
+declare global {
+  interface Window {
+    Outseta: any;
+  }
+}
 import {
   Link,
   NavLink,
@@ -18,20 +24,18 @@ function AppRoot({ children }) {
     if (searchParams.get("access_token")) {
       //   setSearchParams({});
     }
-    fetchUser();
-    
+    if (window.Outseta) {
+        window.Outseta.getUser()
+          .then((profile) => {
+            console.log("User Profile:", profile);
+            
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      }
   }, [searchParams, setSearchParams]);
 
-  const fetchUser = async () => {
-    // fetch user data
-    const response = await fetch("https://search-assistant.outseta.com", {
-        headers: {
-          'Authorization': `Bearer ${searchParams.get("access_token")}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      console.log(response);
-  } 
   return children;
 }
 
