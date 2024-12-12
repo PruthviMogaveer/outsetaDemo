@@ -49,7 +49,7 @@ function AppRoot({ children }) {
     try {
       const res = await axios.post(url, { token }); // Send token as input
       setResponse(res.data); // Store response data
-      console.log("Response:", Number(res.data.authToken));
+      console.log("Response:", res.data.authToken);
       return Number(res.data.authToken);
     } catch (err) {
       setError(err.message);
