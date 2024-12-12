@@ -53,14 +53,14 @@ function App() {
     if (step === "buyerProfile") {
       setIsOnboarding(false);
       setShowDashboardTour(true);
-      window.location.href = "/dashboard";
+      // window.location.href = "/dashboard";
     }
   };
 
   const handleSkipBuyerProfile = () => {
     setIsOnboarding(false);
     setShowDashboardTour(true);
-    window.location.href = "/dashboard";
+    // window.location.href = "/dashboard";
   };
 
   const getNextStep = (currentStep: OnboardingStep): OnboardingStep => {
