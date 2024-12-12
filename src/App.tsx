@@ -26,7 +26,6 @@ import { BuyerProfileStep } from "@/components/onboarding/buyer-profile/BuyerPro
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AppRoot from "@/AppRoot";
 
-
 type AuthMode = "login" | "signup";
 
 function App() {
@@ -76,8 +75,6 @@ function App() {
       setIsOnboarding(true);
     }
   };
-  
-    
 
   return (
     <TooltipProvider>
@@ -111,9 +108,9 @@ function App() {
           >
             <Route>
               <Route
-                path="/dashboard"
+                path="/onboarding"
                 element={
-                  isOnboarding ? (
+                  <>
                     <OnboardingLayout progress={progress}>
                       {progress.currentStep === "subscription" && (
                         <SubscriptionStep
@@ -147,10 +144,14 @@ function App() {
                         />
                       )}
                     </OnboardingLayout>
-                  ) : (
+
                     <BusinessAcquisitionPlatform showTour={showDashboardTour} />
-                  )
+                  </>
                 }
+              />
+              <Route
+                path="/dashboard"
+                element={<BusinessAcquisitionPlatform />}
               />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/all-leads" element={<AllLeads />} />

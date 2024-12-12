@@ -18,11 +18,7 @@ import {
 
 function AppRoot({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [respons, setRespons] = useState(null);
-  const [erro, setErro] = useState(null);
 
   useEffect(() => {
     // Removing the access_token from the url is considered best practice
@@ -33,7 +29,7 @@ function AppRoot({ children }) {
     if (window.Outseta) {
       window.Outseta.getUser()
         .then(async (profile) => {
-          console.log("User Profile:", profile);
+        //   console.log("User Profile:", profile);
           const tocken = await callXanoApi(searchParams.get("access_token"));
           sendDataToXano(profile, tocken);
         })
@@ -48,8 +44,6 @@ function AppRoot({ children }) {
 
     try {
       const res = await axios.post(url, { token }); // Send token as input
-      setResponse(res.data); // Store response data
-      console.log("Response:", String(res.data.authToken));
       return String(res.data.authToken);
     } catch (err) {
       setError(err.message);
@@ -87,14 +81,8 @@ function AppRoot({ children }) {
         body: JSON.stringify(payload),
       });
 
-      if (!res.ok) {
-        throw new Error(`Error: ${res.status} ${res.statusText}`);
-      }
-
-      const data = await res.json();
-      setRespons(data); // Store response data
     } catch (err) {
-      setErro(err.message);
+      setError(err.message);
     }
   };
 
