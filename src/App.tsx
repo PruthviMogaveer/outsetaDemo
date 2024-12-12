@@ -26,6 +26,7 @@ import { BuyerProfileStep } from "@/components/onboarding/buyer-profile/BuyerPro
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AppRoot from "@/AppRoot";
 
+
 type AuthMode = "login" | "signup";
 
 function App() {
@@ -75,6 +76,8 @@ function App() {
       setIsOnboarding(true);
     }
   };
+  
+    
 
   return (
     <TooltipProvider>
