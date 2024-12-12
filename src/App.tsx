@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
   Outlet,
+  useNavigate,
 } from "react-router-dom";
 import BusinessAcquisitionPlatform from "@/components/BusinessAcquisitionPlatform";
 import { AuthScreen } from "@/components/auth/AuthScreen";
@@ -29,6 +30,8 @@ import AppRoot from "@/AppRoot";
 type AuthMode = "login" | "signup";
 
 function App() {
+const navigate = useNavigate();
+
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isOnboarding, setIsOnboarding] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<SubscriptionPlan | null>(
@@ -50,12 +53,14 @@ function App() {
     if (step === "buyerProfile") {
       setIsOnboarding(false);
       setShowDashboardTour(true);
+      navigate("/dashboard");
     }
   };
 
   const handleSkipBuyerProfile = () => {
     setIsOnboarding(false);
     setShowDashboardTour(true);
+    navigate("/dashboard");
   };
 
   const getNextStep = (currentStep: OnboardingStep): OnboardingStep => {
@@ -146,17 +151,13 @@ function App() {
                         />
                       )}
                     </OnboardingLayout>
-                    {showDashboardTour && (
-                      <BusinessAcquisitionPlatform
-                        showTour={showDashboardTour}
-                      />
-                    )}
+                    
                   </>
                 }
               />
               <Route
                 path="/dashboard"
-                element={<BusinessAcquisitionPlatform />}
+                element={<BusinessAcquisitionPlatform showTour={showDashboardTour} />}
               />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/all-leads" element={<AllLeads />} />
