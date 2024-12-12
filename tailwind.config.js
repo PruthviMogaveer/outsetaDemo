@@ -1,4 +1,3 @@
-
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
@@ -53,7 +52,6 @@ export default {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-       
         text: {
           primary: '#03012C',
           secondary: '#3B6064',
