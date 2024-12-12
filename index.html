@@ -16,24 +16,22 @@
       data-options="o_options"
     ></script> -->
 
-
     <script>
       var url = new URL(window.location.href);
       var o_options = {
-        domain: 'search-assistant.outseta.com',
+        domain: "search-assistant.outseta.com",
         monitorDom: true,
         auth: {
-          authenticationCallbackUrl: 
-            !!url.searchParams.get('confirmationToken') 
-              ? 'https://your-domain.com/first-time-login' 
-              : undefined
-        }
+          authenticationCallbackUrl: !!url.searchParams.get("confirmationToken")
+            ? "https://outseta-demo.vercel.app/onboarding"
+            : undefined,
+        },
       };
-      </script>
-      <script src="https://cdn.outseta.com/outseta.min.js" 
-              data-options="o_options"> 
-      </script>
-   
+    </script>
+    <script
+      src="https://cdn.outseta.com/outseta.min.js"
+      data-options="o_options"
+    ></script>
   </head>
   <body>
     <div id="root"></div>
