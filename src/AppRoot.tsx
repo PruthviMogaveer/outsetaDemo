@@ -24,7 +24,7 @@ function AppRoot({ children }) {
 
   const fetchUser = async () => {
     // fetch user data
-    const response = await fetch("https://search-assistant.outseta.com", {
+    const response = await fetch("https://search-assistant.outseta.com/profile", {
         headers: {
           'Authorization': `Bearer ${searchParams.get("access_token")}`,
           'Content-Type': 'application/json',
