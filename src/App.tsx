@@ -144,7 +144,11 @@ function App() {
                         />
                       )}
                     </OnboardingLayout>
-                    <BusinessAcquisitionPlatform showTour={showDashboardTour} />
+                    {showDashboardTour && (
+                      <BusinessAcquisitionPlatform
+                        showTour={showDashboardTour}
+                      />
+                    )}
                   </>
                 }
               />
