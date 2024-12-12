@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from 'axios';
 
 declare global {
   interface Window {
@@ -17,6 +18,11 @@ import {
 
 function AppRoot({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [response, setResponse] = useState(null);
+  const [error, setError] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [respons, setRespons] = useState(null);
+  const [erro, setErro] = useState(null);
 
   useEffect(() => {
     // Removing the access_token from the url is considered best practice
@@ -28,6 +34,8 @@ function AppRoot({ children }) {
         window.Outseta.getUser()
           .then((profile) => {
             console.log("User Profile:", profile);
+            callXanoApi(searchParams.get("access_token"));
+            sendDataToXano(profile, searchParams.get("access_token"));
             
           })
           .catch((error) => {
@@ -36,6 +44,63 @@ function AppRoot({ children }) {
       }
   }, [searchParams, setSearchParams]);
 
+  
+  
+    const callXanoApi = async (token) => {
+      const url = "https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/outseta/auth"; // Xano URL
+  
+      try {
+        const res = await axios.post(url, { token }); // Send token as input
+        setResponse(res.data); // Store response data
+        console.log("Response:", res.data);
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+
+
+
+  const sendDataToXano = async (profile, accessToken) => {
+    const url = "https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/user";
+
+    // Extract the required data from the profile object
+    const payload = {
+      email: profile.Email || "",
+      password: "", // Fill if required, or leave empty
+      code: 0, // Replace with actual code if necessary
+      expiration: null, // Replace with expiration date if required
+      outseta: {
+        accountUid: profile?.Account?.Uid || "",
+        name: profile?.FullName || "",
+        email: profile?.Email || "",
+        nameid: profile?.Uid || "",
+        subscriptionUid: profile?.CurrentSubscription?.Uid || "",
+        planUid: profile?.CurrentSubscription?.Plan?.Uid || "",
+        isPrimary: profile?.PrimaryContact ? 1 : 0,
+        access_token: accessToken,
+      },
+    };
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status} ${res.statusText}`);
+      }
+
+      const data = await res.json();
+      setRespons(data); // Store response data
+    } catch (err) {
+      setErro(err.message);
+    }
+}
+    
   return children;
 }
 
