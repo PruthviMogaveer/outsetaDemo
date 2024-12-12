@@ -18,6 +18,7 @@ function AppRoot({ children }) {
     if (searchParams.get("access_token")) {
       //   setSearchParams({});
     }
+    fetchUser();
     
   }, [searchParams, setSearchParams]);
 
@@ -29,6 +30,7 @@ function AppRoot({ children }) {
           'Content-Type': 'application/json',
         },
       });
+      console.log(response);
   } 
   return children;
 }
