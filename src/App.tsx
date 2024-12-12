@@ -144,6 +144,7 @@ function App() {
                         />
                       )}
                     </OnboardingLayout>
+                    <BusinessAcquisitionPlatform showTour={showDashboardTour} />
                   </>
                 }
               />
