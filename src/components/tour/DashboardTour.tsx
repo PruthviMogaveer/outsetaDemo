@@ -52,15 +52,9 @@ export function DashboardTour() {
       nextBtnText: 'Next',
       prevBtnText: 'Previous',
       doneBtnText: 'Done',
-      onDestroyed: () => {
-        localStorage.setItem('dashboard-tour-completed', 'true');
-      }
     });
 
-    const tourCompleted = localStorage.getItem('dashboard-tour-completed');
-    if (!tourCompleted) {
-      driverObj.drive();
-    }
+    driverObj.drive();
 
     return () => {
       driverObj.destroy();

@@ -109,8 +109,6 @@ export function SearchCriteriaStep({ onComplete, selectedPlan }: SearchCriteriaS
     if (currentSection < sections.length - 1) {
       setCurrentSection(prev => prev + 1);
     } else {
-      // Save the search criteria before moving to the next step
-      localStorage.setItem('searchCriteria', JSON.stringify(criteria));
       onComplete();
     }
   };
