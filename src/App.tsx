@@ -30,7 +30,7 @@ import AppRoot from "@/AppRoot";
 type AuthMode = "login" | "signup";
 
 function App() {
-
+  const navigate = useNavigate();
 
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isOnboarding, setIsOnboarding] = useState(false);
@@ -53,14 +53,14 @@ function App() {
     if (step === "buyerProfile") {
       setIsOnboarding(false);
       setShowDashboardTour(true);
-      // window.location.href = "/dashboard";
+      navigate('/dashboard');
     }
   };
 
   const handleSkipBuyerProfile = () => {
     setIsOnboarding(false);
     setShowDashboardTour(true);
-    // window.location.href = "/dashboard";
+    navigate('/dashboard');
   };
 
   const getNextStep = (currentStep: OnboardingStep): OnboardingStep => {

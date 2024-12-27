@@ -9,6 +9,7 @@ import { BuyerTypeSelect } from './components/BuyerTypeSelect';
 import { ExperienceSelect } from './components/ExperienceSelect';
 import { InvestmentInput } from './components/InvestmentInput';
 import { validateEmail, validatePhone, validateZipCode } from '@/lib/utils/validation';
+import { useNavigate } from 'react-router-dom';
 
 interface BuyerProfileStepProps {
   onComplete: () => void;
@@ -36,6 +37,7 @@ export function BuyerProfileStep({ onComplete, onSkip }: BuyerProfileStepProps) 
   const [profile, setProfile] = useState<BuyerProfile>(initialProfile);
   const [isValid, setIsValid] = useState(false);
   const [touched, setTouched] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (field: keyof BuyerProfile, value: any) => {
     setProfile(prev => {
@@ -74,6 +76,16 @@ export function BuyerProfileStep({ onComplete, onSkip }: BuyerProfileStepProps) 
       data.investmentAmount > 0;
     
     setIsValid(isValid);
+  };
+
+  const handleComplete = () => {
+    onComplete();
+    navigate('/dashboard');
+  };
+
+  const handleSkip = () => {
+    onSkip();
+    navigate('/dashboard');
   };
 
   return (
@@ -126,13 +138,13 @@ export function BuyerProfileStep({ onComplete, onSkip }: BuyerProfileStepProps) 
       <div className="flex justify-between pt-4">
         <Button
           variant="outline"
-          onClick={onSkip}
+          onClick={handleSkip}
           className="border-[#3B6064]/20 hover:bg-[#F9F4F0] text-[#03012C]"
         >
           Skip for Now
         </Button>
         <Button
-          onClick={onComplete}
+          onClick={handleComplete}
           disabled={!isValid && touched}
           className="bg-[#26A96C] hover:bg-[#26A96C]/90 text-white"
         >
