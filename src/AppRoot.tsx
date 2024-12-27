@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 declare global {
@@ -20,31 +19,6 @@ import {
 function AppRoot({ children }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = useState(null);
-  const [hasProfile, setHasProfile] = useState<boolean | null>(null);
-  const navigate = useNavigate();
-
-  const checkProfile = async (token: string) => {
-    try {
-      const response = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:u4WP2Kh2/outseta/profile', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      
-      const hasExistingProfile = !!response.data;
-      setHasProfile(hasExistingProfile);
-      
-      // Redirect based on profile existence
-      if (!hasExistingProfile && window.location.pathname !== '/onboarding') {
-        navigate('/onboarding');
-      } else if (hasExistingProfile && window.location.pathname === '/onboarding') {
-        navigate('/dashboard');
-      }
-    } catch (err) {
-      console.error('Error checking profile:', err);
-      setError(err.message);
-    }
-  };
 
   useEffect(() => {
     // Removing the access_token from the url is considered best practice
@@ -55,9 +29,9 @@ function AppRoot({ children }) {
     if (window.Outseta) {
       window.Outseta.getUser()
         .then(async (profile) => {
-          const token = await callXanoApi(searchParams.get("access_token"));
-          await checkProfile(token);
-          sendDataToXano(profile, token);
+        //   console.log("User Profile:", profile);
+          const tocken = await callXanoApi(searchParams.get("access_token"));
+          sendDataToXano(profile, tocken);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -112,7 +86,7 @@ function AppRoot({ children }) {
     }
   };
 
-  return hasProfile === null ? <div>Loading...</div> : children;
+  return children;
 }
 
 export default AppRoot;
