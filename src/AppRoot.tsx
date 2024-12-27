@@ -31,7 +31,7 @@ function AppRoot({ children }) {
         .then(async (profile) => {
         //   console.log("User Profile:", profile);
           const tocken = await callXanoApi(searchParams.get("access_token"));
-          sendDataToXano(profile, tocken);
+          // sendDataToXano(profile, tocken);
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
