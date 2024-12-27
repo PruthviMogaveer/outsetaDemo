@@ -57,7 +57,7 @@ export const AuthScreen = forwardRef<HTMLDivElement, AuthScreenProps>(
           setError("Passwords do not match");
           return;
         }
-        onSuccess();  // This calls handleAuthSuccess in App.tsx
+        onSuccess();
       } else {
         // For login, simulate authentication
         if (email === "test@example.com" && password === "password") {
