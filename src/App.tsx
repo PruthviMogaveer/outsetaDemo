@@ -26,6 +26,7 @@ import { SearchCriteriaStep } from "@/components/onboarding/search-criteria/Sear
 import { BuyerProfileStep } from "@/components/onboarding/buyer-profile/BuyerProfileStep";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AppRoot from "@/AppRoot";
+import { OutsetaAuth } from "./components/auth/OutsetaAuth";
 
 type AuthMode = "login" | "signup";
 
@@ -93,6 +94,8 @@ function App() {
         <a href="https://search-assistant.outseta.com/auth?widgetMode=register#o-anonymous">
           signup
         </a>
+        
+
         <a href="/#o-logout-link">logot</a>
         <a href="https://search-assistant.outseta.com/profile#o-authenticated">
           profile

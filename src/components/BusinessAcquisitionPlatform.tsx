@@ -7,6 +7,7 @@ import { ViewControls } from '@/components/dashboard/ViewControls';
 import { LeadsList } from '@/components/leads/LeadsList';
 import { DashboardTour } from '@/components/tour/DashboardTour';
 import { mockData } from '@/lib/mock-data';
+import { OutsetaAuth } from './auth/OutsetaAuth';
 
 export interface FilterOptions {
   location?: string;
@@ -117,6 +118,7 @@ const BusinessAcquisitionPlatform: React.FC<BusinessAcquisitionPlatformProps> = 
         <div id="dashboard-stats">
           <DashboardStats stats={mockData.stats} />
         </div>
+        <OutsetaAuth />
         
         <div id="view-controls">
           <ViewControls 
